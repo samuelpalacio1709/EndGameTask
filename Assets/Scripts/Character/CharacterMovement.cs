@@ -19,17 +19,7 @@ namespace Player
         {
             characterController = GetComponent<CharacterController>();
         }
-        private void OnEnable()
-        {
-            CharacterInput.OnInputMovement += ChangePlayerDirection;
-            CharacterInput.onInputAttack += SetAttackMovement;
-        }
-        private void OnDisable()
-        {
-            CharacterInput.OnInputMovement -= ChangePlayerDirection;
-            CharacterInput.onInputAttack -= SetAttackMovement;
 
-        }
         private void Update()
         {
             //Player input applied to character
@@ -66,14 +56,14 @@ namespace Player
 
 
         }
-        private void SetAttackMovement(CharacterAttackState state, Vector3 inputAttackDirection)
+        public void SetAttackMovement(CharacterAttackState state, Vector3 inputAttackDirection)
         {
             isAttacking = state == CharacterAttackState.Attack;
             this.inputAttackDirection = inputAttackDirection;
 
         }
 
-        private void ChangePlayerDirection(Vector2 direction)
+        public void ChangePlayerDirection(Vector2 direction)
         {
             inputDirection = new Vector3(direction.x, 0, direction.y);
         }

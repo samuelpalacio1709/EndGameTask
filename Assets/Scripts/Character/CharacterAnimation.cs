@@ -16,17 +16,7 @@ public class CharacterAnimation : MonoBehaviour
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
     }
-    private void OnEnable()
-    {
-        CharacterInput.OnInputMovement += UpdateMovementAnimation;
-        CharacterInput.onInputAttack += UpdateAttackAnimation;
-    }
-    private void OnDisable()
-    {
-        CharacterInput.OnInputMovement -= UpdateMovementAnimation;
-        CharacterInput.onInputAttack -= UpdateAttackAnimation;
 
-    }
     private void Update()
     {
         SetSmoothAttackAnimation();
@@ -39,11 +29,11 @@ public class CharacterAnimation : MonoBehaviour
                 Mathf.SmoothDamp(currentWeight, attackWeight, ref attackTransitionSpeed, attackTransitionDuration));
     }
 
-    private void UpdateMovementAnimation(Vector2 vector)
+    public void UpdateMovementAnimation(Vector2 vector)
     {
         animator.SetBool("Running", vector.magnitude > 0);
     }
-    private void UpdateAttackAnimation(CharacterAttackState state, Vector3 direction)
+    public void UpdateAttackAnimation(CharacterAttackState state, Vector3 direction)
     {
         this.attackWeight = state == CharacterAttackState.Attack ? 1 : 0;
     }
