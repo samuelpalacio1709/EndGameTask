@@ -17,4 +17,4 @@ MonoBehaviour:
   attackTime: 1.2
   movementSpeed: 3
   minAttackTime: 0.5
-  maxAttackTime: 4
+  maxAttackTime: 3
