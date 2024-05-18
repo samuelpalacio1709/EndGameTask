@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WanderingBehavior : MonoBehaviour
+public class SteeringBehavior : MonoBehaviour
 {
+
+    [Header("Wandering")]
     public float wanderRadius = 10f;
     public float wanderTimeToChange = 5f;
+    public float minDistanceToMove = 2f;
     private float timer;
+
 
 
 
@@ -16,9 +20,19 @@ public class WanderingBehavior : MonoBehaviour
         if (timer >= wanderTimeToChange)
         {
             Vector3 newPos = GetRandomPosition(transform.position, wanderRadius);
-            agent.SetDestination(newPos);
+            if (Vector3.Distance(newPos, agent.transform.position) >= minDistanceToMove)
+            {
+                agent.SetDestination(newPos);
+
+            }
             timer = 0;
         }
+    }
+
+    public void Chase(NavMeshAgent agent, Transform target)
+    {
+        agent.SetDestination(target.position);
+
     }
 
     /// <summary>
@@ -29,13 +43,13 @@ public class WanderingBehavior : MonoBehaviour
     /// <returns></returns>
     public static Vector3 GetRandomPosition(Vector3 origin, float radius)
     {
-        Vector3 randDirection = Random.insideUnitSphere * radius;
+        Vector3 randomPosition = Random.insideUnitSphere * radius;
 
-        randDirection += origin;
+        randomPosition += origin;
 
+        //Make sure the random position is inside the nav mesh.
         NavMeshHit navHit;
-        //Ensure the random position is inside the nav mesh.
-        NavMesh.SamplePosition(randDirection, out navHit, radius, -1);
+        NavMesh.SamplePosition(randomPosition, out navHit, radius, -1);
 
         return navHit.position;
     }

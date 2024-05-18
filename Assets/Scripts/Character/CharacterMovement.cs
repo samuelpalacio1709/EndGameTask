@@ -6,8 +6,7 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class CharacterMovement : MonoBehaviour
     {
-        [SerializeField] private float movementSpeed = 5f;
-        [SerializeField] private float turnSpeed = 15f;
+        [SerializeField] CharacterSettings characterSettings;
         private CharacterController characterController;
         private Vector3 inputDirection;
         private Vector3 inputAttackDirection;
@@ -20,7 +19,7 @@ namespace Player
             characterController = GetComponent<CharacterController>();
         }
 
-        private void Update()
+        public void HandlePlayerMovement()
         {
             //Player input applied to character
             if ((inputDirection.magnitude > 0))
@@ -30,11 +29,11 @@ namespace Player
 
             }
             RotateCharacter();
-
         }
+
         private void MoveCharacter()
         {
-            Vector3 movement = inputDirection * movementSpeed * Time.deltaTime;
+            Vector3 movement = inputDirection * characterSettings.movementSpeed * Time.deltaTime;
             characterController.Move(movement);
         }
 
@@ -51,7 +50,7 @@ namespace Player
                 // Make the transform look at the target position with  smooth
 
                 transform.rotation = Quaternion.Slerp(transform.rotation,
-                                                 movementRotation, Time.deltaTime * turnSpeed);
+                                                 movementRotation, Time.deltaTime * characterSettings.turnSpeed);
             }
 
 

@@ -3,11 +3,12 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Vector3 offset;
+    [SerializeField] private string targetTag;
     public bool followPlayer = false;
     private Transform target;
     void Start()
     {
-        var player = GameObject.FindGameObjectWithTag("Player");
+        var player = GameObject.FindGameObjectWithTag(targetTag);
         if (player != null)
         {
             SetTarget(player.transform);

@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(CharacterAnimation))]
 [RequireComponent(typeof(CharacterMovement))]
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour, IEnemyInteractable
 {
     private CharacterMovement characterMovement;
     private CharacterAnimation characterAnimation;
@@ -30,5 +30,19 @@ public class PlayerManager : MonoBehaviour
         CharacterInput.OnInputMovement -= characterAnimation.UpdateMovementAnimation;
         CharacterInput.onInputAttack -= characterAnimation.UpdateAttackAnimation;
 
+    }
+    private void Update()
+    {
+        characterMovement.HandlePlayerMovement();
+
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
+    }
+
+    public void Interact()
+    {
     }
 }

@@ -5,15 +5,17 @@ using UnityEngine.AI;
 /// Controls all the enemy behaviors
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(WanderingBehavior))]
+[RequireComponent(typeof(SteeringBehavior))]
 [RequireComponent(typeof(CharacterAnimation))]
+[RequireComponent(typeof(EnemyRadar))]
 public class EnemyManager : MonoBehaviour
 {
     public Transform target;
     private CharacterAnimation characterAnimation;
     private NavMeshAgent agent;
-    private WanderingBehavior wanderingBehavior;
-
+    private SteeringBehavior steeringBehavior;
+    private EnemyRadar enemyRadar;
+    private IEnemyInteractable interactable;
     public enum EnemyState { Wandering, Search, Chase, Attack };
     private EnemyState currentState = EnemyState.Wandering;
 
@@ -21,15 +23,33 @@ public class EnemyManager : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        wanderingBehavior = GetComponent<WanderingBehavior>();
+        steeringBehavior = GetComponent<SteeringBehavior>();
         characterAnimation = GetComponent<CharacterAnimation>();
+        enemyRadar = GetComponent<EnemyRadar>();
     }
+    private void OnEnable()
+    {
+        enemyRadar.onInteractableFound += SetChase;
+        enemyRadar.onInteractableLost += SetWander;
+    }
+
+    private void OnDisable()
+    {
+        enemyRadar.onInteractableFound -= SetChase;
+        enemyRadar.onInteractableFound -= SetWander;
+
+    }
+
+
     public void CheckState(EnemyState state)
     {
         switch (state)
         {
             case EnemyState.Wandering:
-                wanderingBehavior.Wander(agent);
+                steeringBehavior.Wander(agent);
+                break;
+            case EnemyState.Chase:
+                steeringBehavior.Chase(agent, interactable.GetTransform());
                 break;
         }
     }
@@ -39,6 +59,18 @@ public class EnemyManager : MonoBehaviour
     {
         CheckState(currentState);
         characterAnimation.UpdateMovementAnimation(agent.velocity);
+    }
+
+    private void SetChase(IEnemyInteractable enemyInteractable)
+    {
+        interactable = enemyInteractable;
+        currentState = EnemyState.Chase;
+    }
+
+    private void SetWander(IEnemyInteractable enemyInteractable)
+    {
+        currentState = EnemyState.Wandering;
+
     }
 
 }

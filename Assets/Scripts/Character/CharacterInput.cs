@@ -9,9 +9,7 @@ public class CharacterInput : MonoBehaviour
     public static Action<Vector2> OnInputMovement;
     public static Action<CharacterAttackState, Vector3> onInputAttack;
     private Coroutine shootingAnimationCouroutine;
-    public GameObject point;
     private CharacterAttackState characterState = CharacterAttackState.Rest;
-
 
     public enum CharacterAttackState
     {
@@ -69,8 +67,6 @@ public class CharacterInput : MonoBehaviour
 
         }
 
-
-
     }
     private IEnumerator StopAttackAnimation()
     {
@@ -85,9 +81,6 @@ public class CharacterInput : MonoBehaviour
         onInputAttack?.Invoke(state, MouseToFloorCoordinates.GetWorldPosition());
 
     }
-
-
-
 
 }
 

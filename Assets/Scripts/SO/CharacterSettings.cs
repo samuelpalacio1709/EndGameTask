@@ -7,4 +7,6 @@ public class CharacterSettings : ScriptableObject
     public string characterName;
     public float totalHealth;
     public float attackTime;
+    public float movementSpeed;
+    public float turnSpeed;
 }

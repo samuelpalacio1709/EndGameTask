@@ -38,5 +38,4 @@ public class CharacterAnimation : MonoBehaviour
         this.attackWeight = state == CharacterAttackState.Attack ? 1 : 0;
     }
 
-
 }
