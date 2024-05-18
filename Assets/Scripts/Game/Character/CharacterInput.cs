@@ -11,12 +11,7 @@ public class CharacterInput : MonoBehaviour
     private Coroutine shootingAnimationCouroutine;
     private CharacterAttackState characterState = CharacterAttackState.Rest;
 
-    public enum CharacterAttackState
-    {
-        Rest,
-        Aim,
-        Attack
-    }
+
 
     private void Awake()
     {
@@ -84,3 +79,9 @@ public class CharacterInput : MonoBehaviour
 
 }
 
+public enum CharacterAttackState
+{
+    Rest,
+    Aim,
+    Attack
+}

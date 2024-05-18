@@ -1,16 +1,17 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SteeringBehavior : MonoBehaviour
+public class SteeringBehaviors : MonoBehaviour
 {
 
     [Header("Wandering")]
-    public float wanderRadius = 10f;
-    public float wanderTimeToChange = 5f;
-    public float minDistanceToMove = 2f;
+    [SerializeField] private float wanderRadius = 10f;
+    [SerializeField] private float wanderTimeToChange = 5f;
+    [SerializeField] private float minDistanceToMove = 2f;
     private float timer;
 
-
+    [Header("Chase")]
+    [SerializeField] private float chaseReactionSpeed = 1.0f;
 
 
     public void Wander(NavMeshAgent agent)
@@ -31,8 +32,8 @@ public class SteeringBehavior : MonoBehaviour
 
     public void Chase(NavMeshAgent agent, Transform target)
     {
-        agent.SetDestination(target.position);
 
+        agent.SetDestination(target.position);
     }
 
     /// <summary>
