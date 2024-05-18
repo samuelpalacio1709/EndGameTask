@@ -1,11 +1,25 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class CharacterInput : MonoBehaviour
 {
+    [SerializeField] private CharacterSettings characterSettings;
     private PlayerInputActions input;
     public static Action<Vector2> OnInputMovement;
-    public static Action<float> onInputAttack;
+    public static Action<CharacterAttackState, Vector3> onInputAttack;
+    private Coroutine shootingAnimationCouroutine;
+    public GameObject point;
+    private CharacterAttackState characterState = CharacterAttackState.Rest;
+
+
+    public enum CharacterAttackState
+    {
+        Rest,
+        Aim,
+        Attack
+    }
+
     private void Awake()
     {
         input = new PlayerInputActions();
@@ -37,9 +51,42 @@ public class CharacterInput : MonoBehaviour
     }
     private void HandleInputAttack(InputAction.CallbackContext context)
     {
-        var value = context.ReadValue<float>();
-        onInputAttack?.Invoke(value);
+
+        var clickValue = context.ReadValue<float>();
+        if ((shootingAnimationCouroutine == null))
+        {
+            if (clickValue <= 0)
+            {
+                characterState = CharacterAttackState.Attack;
+                shootingAnimationCouroutine = StartCoroutine(StopAttackAnimation());
+            }
+            else
+            {
+                characterState = CharacterAttackState.Aim;
+            }
+
+            SetAttackState(characterState);
+
+        }
+
+
+
     }
+    private IEnumerator StopAttackAnimation()
+    {
+        yield return new WaitForSeconds(characterSettings.attackTime);
+        characterState = CharacterAttackState.Rest;
+        SetAttackState(characterState);
+        shootingAnimationCouroutine = null;
+    }
+
+    private void SetAttackState(CharacterAttackState state)
+    {
+        onInputAttack?.Invoke(state, MouseToFloorCoordinates.GetWorldPosition());
+
+    }
+
+
 
 
 }

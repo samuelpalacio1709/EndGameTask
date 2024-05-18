@@ -1,14 +1,15 @@
 using UnityEngine;
+using static CharacterInput;
 
 public class CharacterAnimation : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    [SerializeField] private CharacterSettings characterSettings;
 
     [Header("Attack settings")]
     [SerializeField] private string attackLayerName = "Attack";
     [SerializeField] private float attackTransitionDuration = 0.4f;
-    float attackTransitionSpeed = 0f;
-
+    private float attackTransitionSpeed = 0f;
     private float attackWeight = 0f;
     private void Awake()
     {
@@ -42,9 +43,9 @@ public class CharacterAnimation : MonoBehaviour
     {
         animator.SetBool("Running", vector.magnitude > 0);
     }
-    private void UpdateAttackAnimation(float attackWeight)
+    private void UpdateAttackAnimation(CharacterAttackState state, Vector3 direction)
     {
-        this.attackWeight = attackWeight;
+        this.attackWeight = state == CharacterAttackState.Attack ? 1 : 0;
     }
 
 

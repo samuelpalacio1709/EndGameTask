@@ -1,4 +1,5 @@
 using UnityEngine;
+using static CharacterInput;
 
 namespace Player
 {
@@ -9,7 +10,11 @@ namespace Player
         [SerializeField] private float turnSpeed = 15f;
         private CharacterController characterController;
         private Vector3 inputDirection;
-        Quaternion targetRotation;
+        private Vector3 inputAttackDirection;
+        private bool isAttacking = false;
+        Quaternion movementRotation;
+
+
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
@@ -17,10 +22,13 @@ namespace Player
         private void OnEnable()
         {
             CharacterInput.OnInputMovement += ChangePlayerDirection;
+            CharacterInput.onInputAttack += SetAttackMovement;
         }
         private void OnDisable()
         {
             CharacterInput.OnInputMovement -= ChangePlayerDirection;
+            CharacterInput.onInputAttack -= SetAttackMovement;
+
         }
         private void Update()
         {
@@ -28,7 +36,7 @@ namespace Player
             if ((inputDirection.magnitude > 0))
             {
                 MoveCharacter();
-                targetRotation = Quaternion.LookRotation(inputDirection);
+                movementRotation = Quaternion.LookRotation(inputDirection);
 
             }
             RotateCharacter();
@@ -42,8 +50,26 @@ namespace Player
 
         private void RotateCharacter()
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation,
-                                                 targetRotation, Time.deltaTime * turnSpeed);
+            if (isAttacking)
+            {
+                // Make the transform look at the target position with no smooth
+                Vector3 targetPosition = this.inputAttackDirection;
+                transform.LookAt(targetPosition);
+            }
+            else
+            {
+                // Make the transform look at the target position with  smooth
+
+                transform.rotation = Quaternion.Slerp(transform.rotation,
+                                                 movementRotation, Time.deltaTime * turnSpeed);
+            }
+
+
+        }
+        private void SetAttackMovement(CharacterAttackState state, Vector3 inputAttackDirection)
+        {
+            isAttacking = state == CharacterAttackState.Attack;
+            this.inputAttackDirection = inputAttackDirection;
 
         }
 
