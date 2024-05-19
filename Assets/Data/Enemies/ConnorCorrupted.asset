@@ -15,6 +15,6 @@ MonoBehaviour:
   enemyName: Connor Corrupted
   totalHealth: 125
   attackTime: 1.2
-  movementSpeed: 3
+  movementSpeed: 2
   minAttackTime: 0.5
   maxAttackTime: 3

@@ -10,7 +10,7 @@ public class CharacterInput : MonoBehaviour
     public static Action<CharacterAttackState, Vector3> onInputAttack;
     private Coroutine shootingAnimationCouroutine;
     private CharacterAttackState characterState = CharacterAttackState.Rest;
-
+    private bool canAttack = false;
 
 
     private void Awake()
@@ -44,8 +44,8 @@ public class CharacterInput : MonoBehaviour
     }
     private void HandleInputAttack(InputAction.CallbackContext context)
     {
-
         var clickValue = context.ReadValue<float>();
+
         if ((shootingAnimationCouroutine == null))
         {
             if (clickValue <= 0)
