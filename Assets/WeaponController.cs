@@ -28,7 +28,19 @@ public class WeaponController : MonoBehaviour
     {
         if (state == CharacterAttackState.Attack)
         {
+
             bulletPS.Play();
+        }
+    }
+
+
+    public void SendDamage(GameObject touchedObject)
+    {
+        IDamagable damagable;
+        if (touchedObject.TryGetComponent(out damagable))
+        {
+            damagable.SendDamage();
+
         }
     }
 

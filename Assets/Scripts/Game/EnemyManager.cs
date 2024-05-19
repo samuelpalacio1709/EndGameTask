@@ -9,7 +9,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(SteeringBehaviors))]
 [RequireComponent(typeof(CharacterAnimation))]
 [RequireComponent(typeof(EnemyRadar))]
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : MonoBehaviour, IDamagable
 {
 
     [SerializeField] EnemySettings enemySettings;
@@ -120,4 +120,8 @@ public class EnemyManager : MonoBehaviour
         timeToAttack = Random.Range(enemySettings.minAttackTime, enemySettings.maxAttackTime);
     }
 
+    public void SendDamage()
+    {
+        Debug.Log("Damage");
+    }
 }
