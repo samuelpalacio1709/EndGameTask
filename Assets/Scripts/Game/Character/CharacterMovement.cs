@@ -6,6 +6,7 @@ namespace Player
     public class CharacterMovement : MonoBehaviour
     {
         [SerializeField] CharacterSettings characterSettings;
+        [SerializeField] GameObject characterVisuals;
         private CharacterController characterController;
         private Vector3 inputDirection;
         private Vector3 inputAttackDirection;
@@ -17,6 +18,7 @@ namespace Player
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
+            characterVisuals.transform.localEulerAngles = characterSettings.rotationOffset;
         }
 
         public void HandlePlayerMovement()
@@ -49,14 +51,14 @@ namespace Player
 
                     transform.LookAt(targetPosition);
                     movementRotation = transform.rotation;
-
+                    characterVisuals.transform.localEulerAngles = characterSettings.rotationOffsetOnAttack;
                 }
 
             }
             else
             {
                 // Make the transform look at the target position with  smooth
-
+                characterVisuals.transform.localEulerAngles = characterSettings.rotationOffset;
                 transform.rotation = Quaternion.Slerp(transform.rotation,
                                                  movementRotation, Time.deltaTime * characterSettings.turnSpeed);
             }

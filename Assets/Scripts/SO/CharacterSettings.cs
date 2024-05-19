@@ -9,4 +9,6 @@ public class CharacterSettings : ScriptableObject
     public float attackTime;
     public float movementSpeed;
     public float turnSpeed;
+    public Vector3 rotationOffsetOnAttack = Vector3.zero;
+    public Vector3 rotationOffset = Vector3.zero;
 }

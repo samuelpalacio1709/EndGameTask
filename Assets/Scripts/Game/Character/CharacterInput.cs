@@ -34,6 +34,7 @@ public class CharacterInput : MonoBehaviour
         input.Player.Attack.performed -= HandleInputAttack;
     }
 
+
     private void HandleInputMovementPerformed(InputAction.CallbackContext context)
     {
         OnInputMovement?.Invoke(context.ReadValue<Vector2>());
@@ -50,11 +51,16 @@ public class CharacterInput : MonoBehaviour
         {
             if (clickValue <= 0)
             {
-                characterState = CharacterAttackState.Attack;
-                shootingAnimationCouroutine = StartCoroutine(StopAttackAnimation());
+                if (characterState == CharacterAttackState.Aim)
+                {
+                    characterState = CharacterAttackState.Attack;
+                    shootingAnimationCouroutine = StartCoroutine(StopAttackAnimation());
+                }
+
             }
             else
             {
+
                 characterState = CharacterAttackState.Aim;
             }
 
@@ -66,7 +72,9 @@ public class CharacterInput : MonoBehaviour
     private IEnumerator StopAttackAnimation()
     {
         yield return new WaitForSeconds(characterSettings.attackTime);
-        characterState = CharacterAttackState.Rest;
+        characterState = Mouse.current.leftButton.isPressed ?
+                            CharacterAttackState.Aim : CharacterAttackState.Rest;
+
         SetAttackState(characterState);
         shootingAnimationCouroutine = null;
     }
