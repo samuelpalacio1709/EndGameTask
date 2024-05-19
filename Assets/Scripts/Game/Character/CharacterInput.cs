@@ -4,18 +4,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class CharacterInput : MonoBehaviour
 {
-    [SerializeField] private CharacterSettings characterSettings;
     private PlayerInputActions input;
     public static Action<Vector2> OnInputMovement;
     public static Action<CharacterAttackState, Vector3> onInputAttack;
     private Coroutine shootingAnimationCouroutine;
     private CharacterAttackState characterState = CharacterAttackState.Rest;
-    private bool canAttack = false;
-
+    private CharacterSettings characterSettings;
 
     private void Awake()
     {
         input = new PlayerInputActions();
+        characterSettings = GetComponent<IGameEntity>().GetSettings() as CharacterSettings;
     }
     private void OnEnable()
     {
@@ -93,3 +92,4 @@ public enum CharacterAttackState
     Aim,
     Attack
 }
+

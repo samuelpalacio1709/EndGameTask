@@ -5,18 +5,18 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class CharacterMovement : MonoBehaviour
     {
-        [SerializeField] CharacterSettings characterSettings;
         [SerializeField] GameObject characterVisuals;
         private CharacterController characterController;
         private Vector3 inputDirection;
         private Vector3 inputAttackDirection;
         private bool isAttacking = false;
         private bool rotateToAttack = false;
-        Quaternion movementRotation;
-
+        private Quaternion movementRotation;
+        private CharacterSettings characterSettings;
 
         private void Awake()
         {
+            characterSettings = GetComponent<IGameEntity>().GetSettings() as CharacterSettings;
             characterController = GetComponent<CharacterController>();
             characterVisuals.transform.localEulerAngles = characterSettings.rotationOffset;
         }
@@ -48,7 +48,6 @@ namespace Player
                     rotateToAttack = true;
                     // Make the transform look at the target position with no smooth
                     Vector3 targetPosition = this.inputAttackDirection;
-
                     transform.LookAt(targetPosition);
                     movementRotation = transform.rotation;
                     characterVisuals.transform.localEulerAngles = characterSettings.rotationOffsetOnAttack;

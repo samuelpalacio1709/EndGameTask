@@ -3,16 +3,20 @@ using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// Controls all the enemy behaviors
+/// Handles all the enemy behaviors and controllers
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(SteeringBehaviors))]
 [RequireComponent(typeof(CharacterAnimation))]
 [RequireComponent(typeof(EnemyRadar))]
-public class EnemyManager : MonoBehaviour, IDamagable
+
+public class EnemyManager : MonoBehaviour, IGameEntity
 {
 
-    [SerializeField] EnemySettings enemySettings;
+    [SerializeField] private EnemySettings enemySettings;
+    [SerializeField] private GameObject enemyVisuals;
+    [SerializeField] private WeaponController weaponController;
+    [SerializeField] private HealthController healthController;
 
     private CharacterAnimation characterAnimation;
     private NavMeshAgent agent;
@@ -32,7 +36,8 @@ public class EnemyManager : MonoBehaviour, IDamagable
         enemyRadar = GetComponent<EnemyRadar>();
         GetRandomAttackTime();
         agent.speed = enemySettings.movementSpeed;
-        agent.acceleration = Random.Range(9, 13);
+        enemyVisuals.transform.localEulerAngles = enemySettings.rotationOffset;
+
     }
     private void OnEnable()
     {
@@ -59,11 +64,7 @@ public class EnemyManager : MonoBehaviour, IDamagable
                 ChaseInteractable();
                 break;
             case EnemyState.Attack:
-                steeringBehavior.Chase(agent, interactable.GetTransform());
-                if (attackCoroutine == null)
-                {
-                    attackCoroutine = StartCoroutine(Attack());
-                }
+                TryAttack();
                 break;
         }
     }
@@ -79,15 +80,28 @@ public class EnemyManager : MonoBehaviour, IDamagable
         currentState = EnemyState.Attack;
     }
 
+    private void TryAttack()
+    {
+        steeringBehavior.Chase(agent, interactable.GetTransform());
+        if (attackCoroutine == null)
+        {
+            attackCoroutine = StartCoroutine(Attack());
+        }
+    }
+
     private IEnumerator Attack()
     {
         yield return new WaitForSeconds(timeToAttack);
+        enemyVisuals.transform.localEulerAngles = enemySettings.rotationOffsetOnAttack;
+        weaponController.Fire(CharacterAttackState.Attack, Vector3.zero);
         characterAnimation.UpdateAttackAnimation(CharacterAttackState.Attack,
                                                         Vector3.zero);
 
         yield return new WaitForSeconds(enemySettings.attackTime);
         characterAnimation.UpdateAttackAnimation(CharacterAttackState.Rest,
                                                         Vector3.zero);
+        enemyVisuals.transform.localEulerAngles = enemySettings.rotationOffset;
+
 
         if (currentState == EnemyState.Attack)
         {
@@ -120,8 +134,16 @@ public class EnemyManager : MonoBehaviour, IDamagable
         timeToAttack = Random.Range(enemySettings.minAttackTime, enemySettings.maxAttackTime);
     }
 
-    public void SendDamage()
+    public IEntitySettings GetSettings()
     {
-        Debug.Log("Damage");
+        return enemySettings;
+    }
+
+    public void RecieveDamage(float damage)
+    {
+        if (healthController != null)
+        {
+            healthController.HandleDamage(damage);
+        }
     }
 }

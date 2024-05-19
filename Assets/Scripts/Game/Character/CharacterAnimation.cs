@@ -1,10 +1,10 @@
 using UnityEngine;
-using static CharacterInput;
 
 public class CharacterAnimation : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private CharacterSettings characterSettings;
+
+    private CharacterSettings characterSettings;
 
     [Header("Attack settings")]
     [SerializeField] private string attackLayerName = "Attack";
@@ -15,6 +15,8 @@ public class CharacterAnimation : MonoBehaviour
     {
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
+
+        characterSettings = GetComponent<IGameEntity>().GetSettings() as CharacterSettings;
     }
 
     private void Update()

@@ -4,7 +4,8 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Vector3 offset;
     [SerializeField] private string targetTag;
-    public bool followPlayer = false;
+    [SerializeField] private float cameraFollowSpeed;
+    public bool followTarget = false;
     private Transform target;
     void Start()
     {
@@ -22,11 +23,11 @@ public class CameraController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (target != null && followPlayer)
+        if (target != null && followTarget)
         {
-            var targetPosition = target.position;
-            transform.position = targetPosition + offset;
+            var targetPosition = target.position + offset;
 
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * cameraFollowSpeed);
         }
     }
 }
