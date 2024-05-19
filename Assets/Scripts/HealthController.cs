@@ -13,7 +13,6 @@ public class HealthController : MonoBehaviour
         get => health;
         set
         {
-
             health = value;
             healthView.SetHealth(health, totalHealth);
 
