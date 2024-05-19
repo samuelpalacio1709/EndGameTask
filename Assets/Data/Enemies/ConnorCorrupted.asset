@@ -15,9 +15,10 @@ MonoBehaviour:
   characterName: Angry Connor
   totalHealth: 2000
   attackTime: 1.2
-  damage: 50
+  damage: 20
   movementSpeed: 3
   turnSpeed: 20
+  increaseHealthFactor: 5
   rotationOffsetOnAttack: {x: 0, y: 38, z: 0}
   rotationOffset: {x: 0, y: 20, z: 0}
   color: {r: 0.7477032, g: 0.43614274, b: 0.9339623, a: 1}

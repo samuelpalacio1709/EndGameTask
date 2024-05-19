@@ -17,6 +17,7 @@ public class WeaponController : MonoBehaviour
         var collision = bulletPS.collision;
         collision.collidesWith = layer;
         senderEntity = GetComponentInParent<IGameEntity>();
+        damagePS.gameObject.transform.SetParent(null, false);
     }
 
     public void Fire(CharacterAttackState state, Vector3 vector)
@@ -34,9 +35,10 @@ public class WeaponController : MonoBehaviour
         if (touchedObject.TryGetComponent(out reciverEntity))
         {
             reciverEntity.RecieveDamage(senderEntity.GetSettings().GetDamageValue());
-            ShowDamage(touchedObject);
 
         }
+        ShowDamage(touchedObject);
+
     }
 
     private void ShowDamage(GameObject touchedObject)
@@ -47,8 +49,8 @@ public class WeaponController : MonoBehaviour
         for (int i = 0; i < totalCollisions; i++)
         {
             Vector3 pointOfContact = collisionEvents[i].intersection;
-
-            Debug.Log(pointOfContact);
+            damagePS.transform.position = pointOfContact;
+            damagePS.Play();
         }
     }
 

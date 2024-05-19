@@ -6,6 +6,8 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public GameObject mainCamera;
+
+
     private void Awake()
     {
         if (mainCamera == null)
@@ -13,4 +15,6 @@ public class GameManager : Singleton<GameManager>
             mainCamera = Camera.main.gameObject;
         }
     }
+
+
 }

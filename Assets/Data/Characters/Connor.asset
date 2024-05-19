@@ -15,9 +15,10 @@ MonoBehaviour:
   characterName: Connor
   totalHealth: 1200
   attackTime: 1
-  damage: 65
+  damage: 25
   movementSpeed: 4
   turnSpeed: 15
+  increaseHealthFactor: 4
   rotationOffsetOnAttack: {x: 0, y: 38, z: 0}
   rotationOffset: {x: 0, y: 20, z: 0}
   color: {r: 0.026788909, g: 0.79476786, b: 0.8113208, a: 1}

@@ -659,9 +659,9 @@ PrefabInstance:
       propertyPath: attach
       value: 
       objectReference: {fileID: 2769895559442966381}
-    - target: {fileID: 4230496222211372111, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
-      propertyPath: layer.m_Bits
-      value: 768
+    - target: {fileID: 4726792846529766287, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5307056361321219168, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
       propertyPath: m_LocalPosition.x
@@ -702,6 +702,14 @@ PrefabInstance:
     - target: {fileID: 5307056361321219168, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769079403580506831, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769079403580506831, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
