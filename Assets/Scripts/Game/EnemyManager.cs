@@ -84,6 +84,7 @@ public class EnemyManager : MonoBehaviour
         yield return new WaitForSeconds(timeToAttack);
         characterAnimation.UpdateAttackAnimation(CharacterAttackState.Attack,
                                                         Vector3.zero);
+
         yield return new WaitForSeconds(enemySettings.attackTime);
         characterAnimation.UpdateAttackAnimation(CharacterAttackState.Rest,
                                                         Vector3.zero);

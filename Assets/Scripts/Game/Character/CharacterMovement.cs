@@ -1,5 +1,4 @@
 using UnityEngine;
-using static CharacterInput;
 
 namespace Player
 {
@@ -11,6 +10,7 @@ namespace Player
         private Vector3 inputDirection;
         private Vector3 inputAttackDirection;
         private bool isAttacking = false;
+        private bool rotateToAttack = false;
         Quaternion movementRotation;
 
 
@@ -24,10 +24,10 @@ namespace Player
             //Player input applied to character
             if ((inputDirection.magnitude > 0))
             {
-                MoveCharacter();
                 movementRotation = Quaternion.LookRotation(inputDirection);
 
             }
+            MoveCharacter();
             RotateCharacter();
         }
 
@@ -41,9 +41,17 @@ namespace Player
         {
             if (isAttacking)
             {
-                // Make the transform look at the target position with no smooth
-                Vector3 targetPosition = this.inputAttackDirection;
-                transform.LookAt(targetPosition);
+                if (!rotateToAttack)
+                {
+                    rotateToAttack = true;
+                    // Make the transform look at the target position with no smooth
+                    Vector3 targetPosition = this.inputAttackDirection;
+
+                    transform.LookAt(targetPosition);
+                    movementRotation = transform.rotation;
+
+                }
+
             }
             else
             {
@@ -58,7 +66,10 @@ namespace Player
         public void SetAttackMovement(CharacterAttackState state, Vector3 inputAttackDirection)
         {
             isAttacking = state == CharacterAttackState.Attack;
+            rotateToAttack = false;
             this.inputAttackDirection = inputAttackDirection;
+
+
 
         }
 
