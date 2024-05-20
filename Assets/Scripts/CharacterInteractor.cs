@@ -1,25 +1,41 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterInteractor : MonoBehaviour, IEntityInteractor
 {
-    IPlayerInteractable currentInteractable;
+    [SerializeField] private UnityEvent<IEntityInteractable> onSavedInteractable;
+    IEntityInteractable currentInteractable;
+    private List<IEntityInteractable> equippedInteractables = new List<IEntityInteractable>();
     private void OnEnable()
     {
         CharacterInput.onInputInteract += Interact;
     }
+
+
     private void OnTriggerEnter(Collider other)
     {
-        IPlayerInteractable interactable;
+        IEntityInteractable interactable;
         if (other.gameObject.TryGetComponent(out interactable))
         {
             currentInteractable = interactable;
-            interactable.EnterInteractable();
+            if (CheckIfEntityCanInteract())
+            {
+                interactable.EnterInteractable();
+
+            }
+            else
+            {
+                interactable.PreventInteraction(this);
+
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        IPlayerInteractable interactable;
+        IEntityInteractable interactable;
         if (other.gameObject.TryGetComponent(out interactable))
         {
             if (currentInteractable == interactable)
@@ -35,12 +51,42 @@ public class CharacterInteractor : MonoBehaviour, IEntityInteractor
     {
         if (currentInteractable != null)
         {
-            currentInteractable.Interact(this);
+
+            if (CheckIfEntityCanInteract())
+            {
+                currentInteractable.Interact(this);
+            }
 
         }
     }
-    public void SaveInteractor(GameObject interactor)
+
+    /// <summary>
+    /// Check if entity (player) has all interactables required to interact with the selected interactable
+    /// </summary>
+    /// <returns></returns>
+    private bool CheckIfEntityCanInteract()
     {
+
+        if (currentInteractable == null) return false;
+
+        List<InteractableInfo> interatablesInfo = equippedInteractables
+                            .Select(interactable => interactable.InteractableInfo).ToList();
+
+        if (interatablesInfo == null) return true;
+
+        return currentInteractable.InteractableInfo.requiredInteractables
+                          .All(interactable => interatablesInfo.Contains(interactable));
+    }
+
+    /// <summary>
+    /// Save the interactable in the inside the entity
+    /// </summary>
+    /// <param name="interactor"></param>
+    /// <param name="interactable"></param>
+    public void SaveInteractor(GameObject interactor, IEntityInteractable interactable)
+    {
+        onSavedInteractable?.Invoke(interactable);
+        equippedInteractables.Add(interactable);
         interactor.transform.parent = transform;
         interactor.gameObject.SetActive(false);
     }
@@ -48,5 +94,5 @@ public class CharacterInteractor : MonoBehaviour, IEntityInteractor
 
 public interface IEntityInteractor
 {
-    public void SaveInteractor(GameObject interactor);
+    public void SaveInteractor(GameObject interactor, IEntityInteractable info);
 }

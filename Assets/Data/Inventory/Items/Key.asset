@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03850f8ec5132ad419881a5e018a9deb, type: 3}
+  m_Name: Key
+  m_EditorClassIdentifier: 
+  interactableName: Key
+  icon: {fileID: 21300000, guid: adad087ec5356194a996b7c58bd4fa4b, type: 3}
+  requiredInteractables: []
+  messageOnInteraction: Press f to grab the key
+  messageOnUnableToInteract: 
+  itemType: 1
