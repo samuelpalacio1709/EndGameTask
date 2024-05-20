@@ -3,7 +3,7 @@ public interface IPlayerInteractable
     public void ExitInteractable();
 
     public void EnterInteractable();
-    public void Interact();
+    public void Interact(IEntityInteractor interactor);
 
 
 }

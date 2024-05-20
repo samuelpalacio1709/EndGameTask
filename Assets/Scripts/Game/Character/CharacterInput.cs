@@ -7,6 +7,7 @@ public class CharacterInput : MonoBehaviour
     private PlayerInputActions input;
     public static Action<Vector2> OnInputMovement;
     public static Action<CharacterAttackState, Vector3> onInputAttack;
+    public static Action onInputInteract;
     private Coroutine shootingAnimationCouroutine;
     private CharacterAttackState characterState = CharacterAttackState.Rest;
     private CharacterSettings characterSettings;
@@ -23,6 +24,7 @@ public class CharacterInput : MonoBehaviour
         input.Player.Movement.canceled += HandleInputMovementCanceled;
         input.Player.Attack.performed += HandleInputAttack;
         input.Player.Attack.canceled += HandleInputAttack;
+        input.Player.Interact.performed += HandleInputInteract;
 
     }
     private void OnDisable()
@@ -41,6 +43,10 @@ public class CharacterInput : MonoBehaviour
     private void HandleInputMovementCanceled(InputAction.CallbackContext context)
     {
         OnInputMovement?.Invoke(Vector2.zero);
+    }
+    private void HandleInputInteract(InputAction.CallbackContext context)
+    {
+        onInputInteract?.Invoke();
     }
     private void HandleInputAttack(InputAction.CallbackContext context)
     {

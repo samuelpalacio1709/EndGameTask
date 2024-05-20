@@ -18,7 +18,7 @@ public class Building : MonoBehaviour, IPlayerInteractable
         onEntered?.Invoke();
     }
 
-    public void Interact()
+    public void Interact(IEntityInteractor interactor)
     {
         onInteract?.Invoke();
     }
