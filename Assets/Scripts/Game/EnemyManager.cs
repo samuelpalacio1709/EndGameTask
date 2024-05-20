@@ -75,19 +75,33 @@ public class EnemyManager : MonoBehaviour, IGameEntity
     }
     private void ChaseInteractable()
     {
-        steeringBehavior.Chase(agent, interactable.GetTransform());
+        SetTargetDestination();
         GetRandomAttackTime();
         currentState = EnemyState.Attack;
     }
 
     private void TryAttack()
     {
-        steeringBehavior.Chase(agent, interactable.GetTransform());
+        SetTargetDestination();
         if (attackCoroutine == null)
         {
             attackCoroutine = StartCoroutine(Attack());
         }
     }
+
+    private void SetTargetDestination()
+    {
+        //Check if target is reachable, sometimes player might be inside a building
+        NavMeshPath path = new NavMeshPath();
+        agent.CalculatePath(interactable.GetTransform().position, path);
+        if (path.status == NavMeshPathStatus.PathComplete)
+        {
+            steeringBehavior.Chase(agent, interactable.GetTransform());
+
+        }
+
+    }
+
 
     private IEnumerator Attack()
     {
@@ -119,6 +133,7 @@ public class EnemyManager : MonoBehaviour, IGameEntity
 
     private void SetChase(IEnemyInteractable enemyInteractable)
     {
+
         interactable = enemyInteractable;
         currentState = EnemyState.Chase;
     }
