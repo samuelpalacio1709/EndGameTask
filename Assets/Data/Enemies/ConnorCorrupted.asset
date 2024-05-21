@@ -17,7 +17,7 @@ MonoBehaviour:
   attackTime: 1.2
   damage: 20
   movementSpeed: 2
-  turnSpeed: 20
+  turnSpeed: 100
   increaseHealthFactor: 5
   rotationOffsetOnAttack: {x: 0, y: 38, z: 0}
   rotationOffset: {x: 0, y: 20, z: 0}

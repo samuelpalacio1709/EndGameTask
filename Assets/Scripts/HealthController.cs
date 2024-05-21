@@ -44,6 +44,11 @@ public class HealthController : MonoBehaviour
         {
             IncreaseHealthCoroutine = StartCoroutine(IncreaseHealth());
         }
+        if (Health <= 0)
+        {
+            healthView.ShowDeathParticles(gameEntity.GetPosition());
+            gameEntity.Respawn();
+        }
 
 
     }

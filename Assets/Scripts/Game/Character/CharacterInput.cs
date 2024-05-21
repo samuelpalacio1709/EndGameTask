@@ -8,10 +8,10 @@ public class CharacterInput : MonoBehaviour
     public static Action<Vector2> OnInputMovement;
     public static Action<CharacterAttackState, Vector3> onInputAttack;
     public static Action onInputInteract;
-    private Coroutine shootingAnimationCouroutine;
+    private Coroutine shootingTimeCoroutine;
     private CharacterAttackState characterState = CharacterAttackState.Rest;
     private CharacterSettings characterSettings;
-
+    private WaitForEndOfFrame onFrameEnd = new WaitForEndOfFrame();
     private void Awake()
     {
         input = new PlayerInputActions();
@@ -50,16 +50,29 @@ public class CharacterInput : MonoBehaviour
     }
     private void HandleInputAttack(InputAction.CallbackContext context)
     {
+        StartCoroutine(ProccessAttack(context));
+
+    }
+
+    private IEnumerator ProccessAttack(InputAction.CallbackContext context)
+    {
+        yield return onFrameEnd;
+
+        //Check if the mouse is over UI
+        if (!MouseToFloorCoordinates.IsMouseOnWorldTarget()
+        && characterState != CharacterAttackState.Aim)
+            yield break;
+
         var clickValue = context.ReadValue<float>();
 
-        if ((shootingAnimationCouroutine == null))
+        if ((shootingTimeCoroutine == null))
         {
             if (clickValue <= 0)
             {
                 if (characterState == CharacterAttackState.Aim)
                 {
                     characterState = CharacterAttackState.Attack;
-                    shootingAnimationCouroutine = StartCoroutine(StopAttackAnimation());
+                    shootingTimeCoroutine = StartCoroutine(StopAttack());
                 }
 
             }
@@ -72,16 +85,15 @@ public class CharacterInput : MonoBehaviour
             SetAttackState(characterState);
 
         }
-
     }
-    private IEnumerator StopAttackAnimation()
+    private IEnumerator StopAttack()
     {
         yield return new WaitForSeconds(characterSettings.attackTime);
         characterState = Mouse.current.leftButton.isPressed ?
                             CharacterAttackState.Aim : CharacterAttackState.Rest;
 
         SetAttackState(characterState);
-        shootingAnimationCouroutine = null;
+        shootingTimeCoroutine = null;
     }
 
     private void SetAttackState(CharacterAttackState state)

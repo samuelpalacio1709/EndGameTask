@@ -1,14 +1,13 @@
-using Player;
 using UnityEngine;
 
 /// <summary>
 /// Subscribe to the player input events to call all character animations and movement behaviorss
 /// </summary>
 [RequireComponent(typeof(CharacterAnimation))]
-[RequireComponent(typeof(CharacterMovement))]
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerManager : MonoBehaviour, IEnemyInteractable, IGameEntity
 {
-    private CharacterMovement characterMovement;
+    private PlayerMovement characterMovement;
     private CharacterAnimation characterAnimation;
     [SerializeField] private CharacterSettings characterSettings;
     [SerializeField] private WeaponController weaponController;
@@ -16,7 +15,7 @@ public class PlayerManager : MonoBehaviour, IEnemyInteractable, IGameEntity
 
     private void Awake()
     {
-        characterMovement = GetComponent<CharacterMovement>();
+        characterMovement = GetComponent<PlayerMovement>();
         characterAnimation = GetComponent<CharacterAnimation>();
 
     }
@@ -61,9 +60,6 @@ public class PlayerManager : MonoBehaviour, IEnemyInteractable, IGameEntity
     public void Interact()
     {
     }
-
-
-
     public IEntitySettings GetSettings()
     {
         return characterSettings;
@@ -75,5 +71,15 @@ public class PlayerManager : MonoBehaviour, IEnemyInteractable, IGameEntity
         {
             healthController.HandleDamage(damage);
         }
+    }
+
+    public void Respawn()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public Vector3 GetPosition()
+    {
+        return gameObject.transform.position;
     }
 }

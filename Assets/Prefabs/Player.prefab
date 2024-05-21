@@ -122,6 +122,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea28af04d6937e4d9fedd8be28cc5ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onSavedInteractable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 5409c5133eacfc640bc24119742bfcd5, type: 2}
+        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+        m_MethodName: AddOneItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1625110120283548999
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,9 +451,9 @@ GameObject:
   - component: {fileID: 4850711222272523301}
   - component: {fileID: 1568634497117524620}
   - component: {fileID: 6127043076546040678}
-  - component: {fileID: 521124483600583917}
   - component: {fileID: 1775409857875027338}
   - component: {fileID: 2940306488302903585}
+  - component: {fileID: 4360032682141042437}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -527,19 +542,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c9024f955caec47835f7d3773095e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &521124483600583917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7275830170705054771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97eadf6a659627940aa92e826b00d1ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterVisuals: {fileID: 2956322963579251515}
 --- !u!114 &1775409857875027338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,6 +572,19 @@ MonoBehaviour:
   characterSettings: {fileID: 11400000, guid: 4ef55928ac14e3f41a90c8f703880458, type: 2}
   weaponController: {fileID: 8270652101206942110}
   healthController: {fileID: 7269667351910483016}
+--- !u!114 &4360032682141042437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7275830170705054771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa95b5822194fa43b171fb084721b6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterVisuals: {fileID: 2956322963579251515}
 --- !u!1001 &976611474354285044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -578,6 +593,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3505294546144418764}
     m_Modifications:
+    - target: {fileID: 1162727924322370834, guid: a47f93071928c7d439f400a2be34b64b, type: 3}
+      propertyPath: m_text
+      value: Name
+      objectReference: {fileID: 0}
     - target: {fileID: 4333924214742274661, guid: a47f93071928c7d439f400a2be34b64b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

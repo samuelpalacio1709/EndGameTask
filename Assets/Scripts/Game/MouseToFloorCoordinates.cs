@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MouseToFloorCoordinates : MonoBehaviour
 {
@@ -24,5 +25,14 @@ public class MouseToFloorCoordinates : MonoBehaviour
             worldPosition = ray.GetPoint(distance);
         }
         return worldPosition;
+    }
+    /// <summary>
+    /// Check if mouse is hovering UI or a gameobject
+    /// </summary>
+    /// <returns></returns>
+    public static bool IsMouseOnWorldTarget()
+    {
+        return !EventSystem.current.IsPointerOverGameObject();
+
     }
 }

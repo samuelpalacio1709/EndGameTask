@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -5,19 +6,31 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Vector3 offset;
     [SerializeField] private string targetTag;
     [SerializeField] private float cameraFollowSpeed;
+    [SerializeField] public Camera camera;
     public bool followTarget = false;
     private Transform target;
-    void Start()
+    private float initialSpeed;
+    private void Awake()
     {
-        var player = GameObject.FindGameObjectWithTag(targetTag);
-        if (player != null)
+        initialSpeed = cameraFollowSpeed;
+        if (camera == null)
         {
-            SetTarget(player.transform);
+            camera = Camera.main;
         }
     }
-    private void SetTarget(Transform target)
+    void Start()
     {
-        this.target = target;
+        SetTarget(targetTag);
+        StartCoroutine(ShowInitialAnimation());
+    }
+    private void SetTarget(string tag)
+    {
+        var player = GameObject.FindGameObjectWithTag(tag);
+        if (player != null)
+        {
+            this.target = player.transform;
+
+        }
 
     }
 
@@ -27,7 +40,21 @@ public class CameraController : MonoBehaviour
         {
             var targetPosition = target.position + offset;
 
-            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * cameraFollowSpeed);
+            camera.transform.position = Vector3.Lerp(camera.transform.position,
+                                                targetPosition, Time.deltaTime * cameraFollowSpeed);
         }
+    }
+
+    public IEnumerator ShowInitialAnimation()
+    {
+        cameraFollowSpeed = 0;
+        yield return new WaitForSeconds(1f);
+        while (cameraFollowSpeed != initialSpeed)
+        {
+            yield return new WaitForSeconds(0.1f);
+            cameraFollowSpeed += 0.1f;
+        }
+        cameraFollowSpeed = initialSpeed;
+
     }
 }

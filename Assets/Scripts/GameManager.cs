@@ -5,14 +5,20 @@ using UnityEngine;
 /// </summary>
 public class GameManager : Singleton<GameManager>
 {
-    public GameObject mainCamera;
+    public CameraController cameraController;
+    private GameObject maincamera;
 
+    public GameObject Maincamera
+    {
+        get => maincamera;
+        private set => maincamera = value;
+    }
 
     private void Awake()
     {
-        if (mainCamera == null)
+        if (cameraController.camera == null)
         {
-            mainCamera = Camera.main.gameObject;
+            Maincamera = Camera.main.gameObject;
         }
     }
 

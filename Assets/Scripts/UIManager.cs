@@ -37,7 +37,6 @@ public class UIManager : Singleton<UIManager>
                     break;
                 case InventoryInteractableInfo.ItemType.Consumable:
                     consumablesSlots[i].ShowIcon(inventoryItem.icon);
-
                     break;
                 default:
                     break;
@@ -46,10 +45,9 @@ public class UIManager : Singleton<UIManager>
 
     }
 
-
-
     public void ShowToastMessage(string message)
     {
+
         if (toastMessage != null)
         {
             toastMessage.text = message;
