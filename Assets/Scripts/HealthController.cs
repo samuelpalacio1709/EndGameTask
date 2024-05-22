@@ -36,7 +36,7 @@ public class HealthController : MonoBehaviour
     }
 
 
-    public void HandleDamage(float damage)
+    public float HandleDamage(float damage)
     {
 
         Health -= damage;
@@ -44,13 +44,13 @@ public class HealthController : MonoBehaviour
         {
             IncreaseHealthCoroutine = StartCoroutine(IncreaseHealth());
         }
-        if (Health <= 0)
-        {
-            healthView.ShowDeathParticles(gameEntity.GetPosition());
-            gameEntity.Respawn();
-        }
 
-
+        return Health;
+    }
+    public void ResetHealth()
+    {
+        healthView.ShowDeathParticles(gameEntity.GetPosition());
+        Health = CharacterSettings.GetTotalHealth();
     }
 
     private IEnumerator IncreaseHealth()

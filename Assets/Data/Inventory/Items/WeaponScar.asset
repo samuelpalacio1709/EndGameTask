@@ -17,4 +17,5 @@ MonoBehaviour:
   requiredInteractables: []
   messageOnInteraction: 
   messageOnUnableToInteract: 
+  onInventory: 1
   itemType: 0

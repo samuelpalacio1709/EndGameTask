@@ -17,4 +17,5 @@ MonoBehaviour:
   requiredInteractables:
   - {fileID: 11400000, guid: 9f1f5bca2b94c6f42a572e627c16206f, type: 2}
   messageOnInteraction: 
-  messageOnUnableToInteract: You must own ##
+  messageOnUnableToInteract: You must own a key
+  onInventory: 0

@@ -14,17 +14,19 @@ public class CharacterInput : MonoBehaviour
     private WaitForEndOfFrame onFrameEnd = new WaitForEndOfFrame();
     private void Awake()
     {
-        input = new PlayerInputActions();
         characterSettings = GetComponent<IGameEntity>().GetSettings() as CharacterSettings;
     }
     private void OnEnable()
     {
+        input = new PlayerInputActions();
         input.Enable();
         input.Player.Movement.performed += HandleInputMovementPerformed;
         input.Player.Movement.canceled += HandleInputMovementCanceled;
         input.Player.Attack.performed += HandleInputAttack;
         input.Player.Attack.canceled += HandleInputAttack;
         input.Player.Interact.performed += HandleInputInteract;
+        SetAttackState(CharacterAttackState.Rest);
+        shootingTimeCoroutine = null;
 
     }
     private void OnDisable()
@@ -33,6 +35,8 @@ public class CharacterInput : MonoBehaviour
         input.Player.Movement.performed -= HandleInputMovementPerformed;
         input.Player.Movement.canceled -= HandleInputMovementCanceled;
         input.Player.Attack.performed -= HandleInputAttack;
+        input.Player.Attack.canceled -= HandleInputAttack;
+        input.Player.Interact.performed -= HandleInputInteract;
     }
 
 

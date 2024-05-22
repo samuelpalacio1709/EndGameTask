@@ -16,5 +16,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: adad087ec5356194a996b7c58bd4fa4b, type: 3}
   requiredInteractables: []
   messageOnInteraction: Press f to grab the key
-  messageOnUnableToInteract: 
+  messageOnUnableToInteract: You already own this item
+  onInventory: 0
   itemType: 1

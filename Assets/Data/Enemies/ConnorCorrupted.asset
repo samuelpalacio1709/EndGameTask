@@ -15,7 +15,7 @@ MonoBehaviour:
   characterName: Angry Connor
   totalHealth: 2000
   attackTime: 1.2
-  damage: 20
+  damage: 45
   movementSpeed: 2
   turnSpeed: 100
   increaseHealthFactor: 5

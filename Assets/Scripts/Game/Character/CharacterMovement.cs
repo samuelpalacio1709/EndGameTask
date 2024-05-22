@@ -20,7 +20,11 @@ public class CharacterMovement : MonoBehaviour
     {
         Init();
     }
-
+    private void OnEnable()
+    {
+        isAttacking = false;
+        rotateToAttack = false;
+    }
     public virtual void HandlePlayerMovement()
     {
         //Player input applied to character

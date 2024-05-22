@@ -10,6 +10,7 @@ public class InteractableInfo : ScriptableObject
     public List<InteractableInfo> requiredInteractables;
     public string messageOnInteraction;
     public string messageOnUnableToInteract;
+    public bool onInventory = false;
 }
 
 

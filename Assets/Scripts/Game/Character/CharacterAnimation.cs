@@ -6,7 +6,7 @@ public class CharacterAnimation : MonoBehaviour
 
     private CharacterSettings characterSettings;
 
-    [Header("Attack settings")]
+    [Header("Attack enemySettings")]
     [SerializeField] private string attackLayerName = "Attack";
     [SerializeField] private float attackTransitionDuration = 0.4f;
     private float attackTransitionSpeed = 0f;
@@ -17,6 +17,10 @@ public class CharacterAnimation : MonoBehaviour
             animator = GetComponentInChildren<Animator>();
 
         characterSettings = GetComponent<IGameEntity>().GetSettings() as CharacterSettings;
+    }
+    private void OnDisable()
+    {
+        UpdateAttackAnimation(CharacterAttackState.Rest, Vector3.zero);
     }
 
     private void Update()

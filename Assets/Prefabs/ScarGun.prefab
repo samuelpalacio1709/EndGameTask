@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzle: {fileID: 3158929266471865703}
+  weaponRenderer: {fileID: 7263641872660198371}
 --- !u!1 &2174566950387501273
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +146,11 @@ PrefabInstance:
       addedObject: {fileID: 3158929266471865703}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45b8a0b66330391469806d9e8fd17401, type: 3}
+--- !u!23 &7263641872660198371 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 45b8a0b66330391469806d9e8fd17401, type: 3}
+  m_PrefabInstance: {fileID: 8290060858700263271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8396555857777625228 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 45b8a0b66330391469806d9e8fd17401, type: 3}

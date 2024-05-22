@@ -21,9 +21,9 @@ public class CharacterInteractor : MonoBehaviour, IEntityInteractor
         {
             currentInteractable = interactable;
             if (CheckIfEntityCanInteract())
+
             {
                 interactable.EnterInteractable();
-
             }
             else
             {
@@ -68,6 +68,7 @@ public class CharacterInteractor : MonoBehaviour, IEntityInteractor
     {
 
         if (currentInteractable == null) return false;
+        if (currentInteractable.InteractableInfo.onInventory) return false;
 
         List<InteractableInfo> interatablesInfo = equippedInteractables
                             .Select(interactable => interactable.InteractableInfo).ToList();
@@ -85,6 +86,7 @@ public class CharacterInteractor : MonoBehaviour, IEntityInteractor
     /// <param name="interactable"></param>
     public void SaveInteractor(GameObject interactor, IEntityInteractable interactable)
     {
+        interactable.InteractableInfo.onInventory = true;
         onSavedInteractable?.Invoke(interactable);
         equippedInteractables.Add(interactable);
         interactor.transform.parent = transform;

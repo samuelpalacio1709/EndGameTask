@@ -37,6 +37,11 @@ public class CharacterSettings : ScriptableObject, IEntitySettings
     {
         return totalHealth;
     }
+
+    public string GetName()
+    {
+        return characterName;
+    }
 }
 
 
@@ -48,6 +53,7 @@ public interface IEntitySettings
     public float GetDamageValue();
     public float GetHealthIncreaseFactor();
     public float GetTotalHealth();
+    public string GetName();
 
 
 

@@ -7,53 +7,56 @@ using UnityEngine.AI;
 /// </summary>
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(SteeringBehaviors))]
-[RequireComponent(typeof(CharacterAnimation))]
-[RequireComponent(typeof(CharacterMovement))]
 [RequireComponent(typeof(EnemyRadar))]
 
-public class EnemyManager : MonoBehaviour, IGameEntity
+public class EnemyManager : EntityManager
 {
 
     [SerializeField] private EnemySettings enemySettings;
     [SerializeField] private WeaponController weaponController;
-    [SerializeField] private HealthController healthController;
 
-    private CharacterMovement characterMovement;
-    private CharacterAnimation characterAnimation;
     private NavMeshAgent agent;
     private SteeringBehaviors steeringBehavior;
     private EnemyRadar enemyRadar;
     private IEnemyInteractable interactable;
-    public enum EnemyState { Wandering, Chase, Attack, Evade };
+    public enum EnemyState { Wandering, Chase, Attack };
     private EnemyState currentState = EnemyState.Wandering;
 
     private Coroutine attackCoroutine;
     private float timeToAttack = 0;
-    private void Awake()
+
+    public override void Init()
     {
-        Init();
-    }
-    private void Init()
-    {
+        base.Init();
+        enemySettings = settings as EnemySettings;
         agent = GetComponent<NavMeshAgent>();
         steeringBehavior = GetComponent<SteeringBehaviors>();
-        characterAnimation = GetComponent<CharacterAnimation>();
         enemyRadar = GetComponent<EnemyRadar>();
         GetRandomAttackTime();
         agent.speed = enemySettings.movementSpeed;
-        characterMovement = GetComponent<CharacterMovement>();
         agent.angularSpeed = enemySettings.turnSpeed;
     }
     private void OnEnable()
     {
         enemyRadar.onInteractableFound += SetChase;
         enemyRadar.onInteractableLost += SetWander;
+        onEntityKilled += SetWander;
     }
 
     private void OnDisable()
     {
         enemyRadar.onInteractableFound -= SetChase;
-        enemyRadar.onInteractableFound -= SetWander;
+        enemyRadar.onInteractableLost -= SetWander;
+        onEntityKilled -= SetWander;
+
+        StopAllCoroutines();
+        ResetAttack();
+        currentState = EnemyState.Wandering;
+    }
+    private void Update()
+    {
+        CheckState(currentState);
+        characterAnimation.UpdateMovementAnimation(agent.velocity);
 
     }
     public void CheckState(EnemyState state)
@@ -81,7 +84,6 @@ public class EnemyManager : MonoBehaviour, IGameEntity
         GetRandomAttackTime();
         currentState = EnemyState.Attack;
     }
-
     private void TryAttack()
     {
         SetTargetDestination();
@@ -90,7 +92,6 @@ public class EnemyManager : MonoBehaviour, IGameEntity
             attackCoroutine = StartCoroutine(Attack());
         }
     }
-
     private void SetTargetDestination()
     {
         //Check if target is reachable, sometimes player might be inside a building
@@ -101,9 +102,7 @@ public class EnemyManager : MonoBehaviour, IGameEntity
             steeringBehavior.Chase(agent, interactable.GetTransform());
 
         }
-
     }
-
     private IEnumerator Attack()
     {
         yield return new WaitForSeconds(timeToAttack);
@@ -111,68 +110,37 @@ public class EnemyManager : MonoBehaviour, IGameEntity
         characterAnimation.UpdateAttackAnimation(CharacterAttackState.Attack,
                                                         Vector3.zero);
 
-
         characterMovement.SetAttackMovement(CharacterAttackState.Attack, agent.destination);
         characterMovement.RotateCharacter();
 
         yield return new WaitForSeconds(enemySettings.attackTime);
+        ResetAttack();
+    }
+    private void ResetAttack()
+    {
         characterMovement.ResetCharacterVisualRotation();
         characterAnimation.UpdateAttackAnimation(CharacterAttackState.Rest,
                                                         Vector3.zero);
-
 
         if (currentState == EnemyState.Attack)
         {
             currentState = EnemyState.Chase;
         }
         attackCoroutine = null;
-
     }
-
-    private void Update()
-    {
-        CheckState(currentState);
-        characterAnimation.UpdateMovementAnimation(agent.velocity);
-    }
-
     private void SetChase(IEnemyInteractable enemyInteractable)
     {
 
         interactable = enemyInteractable;
         currentState = EnemyState.Chase;
     }
-
-    private void SetWander(IEnemyInteractable enemyInteractable)
+    private void SetWander()
     {
+        Debug.Log("Wander");
         currentState = EnemyState.Wandering;
-
     }
-
     private void GetRandomAttackTime()
     {
         timeToAttack = Random.Range(enemySettings.minAttackTime, enemySettings.maxAttackTime);
-    }
-
-    public IEntitySettings GetSettings()
-    {
-        return enemySettings;
-    }
-
-    public void RecieveDamage(float damage)
-    {
-        if (healthController != null)
-        {
-            healthController.HandleDamage(damage);
-        }
-    }
-
-    public Vector3 GetPosition()
-    {
-        return transform.position;
-    }
-
-    public void Respawn()
-    {
-        gameObject.SetActive(false);
     }
 }

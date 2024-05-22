@@ -7,7 +7,7 @@ public class EnemyRadar : MonoBehaviour
     [SerializeField] private GameObject radar;
     [SerializeField] private float radarRadius;
     public Action<IEnemyInteractable> onInteractableFound;
-    public Action<IEnemyInteractable> onInteractableLost;
+    public Action onInteractableLost;
     IEnemyInteractable interactable;
 
     private void Start()
@@ -30,7 +30,8 @@ public class EnemyRadar : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out interactable))
         {
-            onInteractableLost?.Invoke(interactable);
+            onInteractableLost?.Invoke();
+
         }
     }
 }

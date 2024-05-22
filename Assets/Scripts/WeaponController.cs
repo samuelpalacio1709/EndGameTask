@@ -10,10 +10,23 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private Transform bulletsParent;
     [SerializeField] private LayerMask layer;
 
+    [SerializeField] private Material customMaterial;
+    [SerializeField] private bool useCustomMaterial;
+
+
+    private Weapon weapon;
+    private void Start()
+    {
+        if (customMaterial)
+        {
+            weapon.SetSkin(customMaterial);
+        }
+    }
+
     private IGameEntity senderEntity;
     void Awake()
     {
-        Instantiate(gunPrefab, attach);
+        Instantiate(gunPrefab, attach).TryGetComponent(out weapon);
         var collision = bulletPS.collision;
         collision.collidesWith = layer;
         senderEntity = GetComponentInParent<IGameEntity>();
@@ -34,7 +47,7 @@ public class WeaponController : MonoBehaviour
         IGameEntity reciverEntity;
         if (touchedObject.TryGetComponent(out reciverEntity))
         {
-            reciverEntity.RecieveDamage(senderEntity.GetSettings().GetDamageValue());
+            reciverEntity.RecieveDamage(senderEntity);
 
         }
         ShowDamage(touchedObject);
