@@ -14,7 +14,7 @@ This project uses the Unity Input System to handle both PC and mobile gamepad bi
 
 Each game entity has different components that serve a single purpose, such as the weapon controller and health controller. For the player attack system, I took inspiration from games like Zooba, Brawl Stars, and Zombs Royale.
 
-### Interactables
+###  Interactables
 
 For the player to interact with buildings, keys, or enemies, I used a reusable approach with interfaces. Each component is responsible for handling how it responds to player interactions
 
