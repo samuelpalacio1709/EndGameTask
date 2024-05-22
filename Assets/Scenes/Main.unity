@@ -3518,7 +3518,6 @@ GameObject:
   - component: {fileID: 790951966}
   - component: {fileID: 790951965}
   - component: {fileID: 790951969}
-  - component: {fileID: 790951968}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -3641,18 +3640,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790951963}
   m_CullTransparentMesh: 1
---- !u!114 &790951968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 790951963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dec1c8ff6da840f4295d9794273926df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &790951969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6675,7 +6662,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 111.591675, y: 38.496704}
   m_Pivot: {x: 1, y: 1}
 --- !u!1 &1488365039 stripped
@@ -7550,7 +7537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 9.799988, y: -3.2999878}
+  m_AnchoredPosition: {x: 9.800049, y: -3.2999878}
   m_SizeDelta: {x: 438.59998, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1718127021
@@ -11705,10 +11692,6 @@ PrefabInstance:
     - target: {fileID: 7275830170705054771, guid: 5adb67e93a3b68a4da74297abc3c65fd, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7275830170705054771, guid: 5adb67e93a3b68a4da74297abc3c65fd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
