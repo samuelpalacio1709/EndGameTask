@@ -21,3 +21,6 @@ For the player to interact with buildings, keys, or enemies, I used a reusable a
 ### Inventory
 
 The player can save interactables inside an inventory. I used a Scriptable Object game events architecture approach to ensure the inventory is not reliant on the player, and vice versa. The player changes the inventory Scriptable Object, and every other object can easily listen for these changes.
+
+
+A pc and mobile executables are included in the executables folder
