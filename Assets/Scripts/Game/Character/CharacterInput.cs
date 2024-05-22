@@ -37,6 +37,7 @@ public class CharacterInput : MonoBehaviour
         input.Player.Attack.performed -= HandleInputAttack;
         input.Player.Attack.canceled -= HandleInputAttack;
         input.Player.Interact.performed -= HandleInputInteract;
+        StopAllCoroutines();
     }
 
 
@@ -54,7 +55,11 @@ public class CharacterInput : MonoBehaviour
     }
     private void HandleInputAttack(InputAction.CallbackContext context)
     {
-        StartCoroutine(ProccessAttack(context));
+        if (gameObject.activeSelf)
+        {
+            StartCoroutine(ProccessAttack(context));
+
+        }
 
     }
 

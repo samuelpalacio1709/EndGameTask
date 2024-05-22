@@ -10,7 +10,5 @@ public class Pickable : Interactable
         interactor.SaveInteractor(this.gameObject, this);
     }
 
-    public void SetSprite()
-    {
-    }
+
 }

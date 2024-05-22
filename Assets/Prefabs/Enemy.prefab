@@ -845,6 +845,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7973366016977668974}
   - component: {fileID: 2511684988988412021}
+  - component: {fileID: 2416981985141047462}
   m_Layer: 7
   m_Name: Connor_Rig
   m_TagString: Untagged
@@ -890,6 +891,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2416981985141047462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107041189059948574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2593c98a755177c4eb8021febe4a3723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAnimationEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2136233132448987199
 GameObject:
   m_ObjectHideFlags: 0
@@ -3504,7 +3520,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: dbcbd751c173c7f47baf3e935ee20952, type: 2}
   healthController: {fileID: 2633962136945918971}
-  enemySettings: {fileID: 11400000, guid: dbcbd751c173c7f47baf3e935ee20952, type: 2}
   weaponController: {fileID: 2581642135523758732}
 --- !u!114 &346047827512716460
 MonoBehaviour:
@@ -3854,6 +3869,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponController
       objectReference: {fileID: 0}
+    - target: {fileID: 1194131332614121779, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: m_Volume
+      value: 0.019
+      objectReference: {fileID: 0}
     - target: {fileID: 4230496222211372111, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
       propertyPath: attach
       value: 
@@ -3909,6 +3928,10 @@ PrefabInstance:
     - target: {fileID: 5307056361321219168, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8981801695707164550, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: m_Volume
+      value: 0.005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

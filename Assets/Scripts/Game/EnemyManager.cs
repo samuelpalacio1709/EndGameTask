@@ -12,9 +12,8 @@ using UnityEngine.AI;
 public class EnemyManager : EntityManager
 {
 
-    [SerializeField] private EnemySettings enemySettings;
     [SerializeField] private WeaponController weaponController;
-
+    private EnemySettings enemySettings;
     private NavMeshAgent agent;
     private SteeringBehaviors steeringBehavior;
     private EnemyRadar enemyRadar;
@@ -40,14 +39,14 @@ public class EnemyManager : EntityManager
     {
         enemyRadar.onInteractableFound += SetChase;
         enemyRadar.onInteractableLost += SetWander;
-        onEntityKilled += SetWander;
+        onEntityKilled += ProccessEntityKilled;
     }
 
     private void OnDisable()
     {
         enemyRadar.onInteractableFound -= SetChase;
         enemyRadar.onInteractableLost -= SetWander;
-        onEntityKilled -= SetWander;
+        onEntityKilled -= ProccessEntityKilled;
 
         StopAllCoroutines();
         ResetAttack();
@@ -73,6 +72,13 @@ public class EnemyManager : EntityManager
                 TryAttack();
                 break;
         }
+    }
+
+    private void ProccessEntityKilled(string info)
+    {
+
+        //When the enemy kills a player set state to wander
+        SetWander();
     }
     private void WanderFreely()
     {

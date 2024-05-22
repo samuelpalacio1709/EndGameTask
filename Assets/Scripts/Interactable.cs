@@ -6,6 +6,7 @@ public class Interactable : MonoBehaviour, IEntityInteractable
     [SerializeField] private InteractableInfo interactableInfo;
     [SerializeField] private UnityEvent onEntered;
     [SerializeField] private UnityEvent onExit;
+    [SerializeField] private UnityEvent onHoverExit;
     [SerializeField] private UnityEvent onInteract;
     public InteractableInfo InteractableInfo => interactableInfo;
 
@@ -17,10 +18,14 @@ public class Interactable : MonoBehaviour, IEntityInteractable
 
     public virtual void ExitInteractable()
     {
-        Debug.Log("eXIT");
         onExit?.Invoke();
         UIManager.Instance.HideToastMessage();
 
+    }
+
+    public void HoverExit()
+    {
+        onHoverExit?.Invoke();
     }
 
     public virtual void Interact(IEntityInteractor interactor)

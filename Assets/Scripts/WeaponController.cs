@@ -1,17 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponController : MonoBehaviour
 {
+
+    public UnityEvent onFire;
+    public UnityEvent onDamage;
+
     [SerializeField] private GameObject gunPrefab;
     [SerializeField] private Transform attach;
-    [SerializeField] private ParticleSystem bulletPS;
-    [SerializeField] private ParticleSystem damagePS;
     [SerializeField] private Transform bulletsParent;
     [SerializeField] private LayerMask layer;
-
     [SerializeField] private Material customMaterial;
     [SerializeField] private bool useCustomMaterial;
+
+    [Header("Visuals")]
+    [SerializeField] private ParticleSystem bulletPS;
+    [SerializeField] private ParticleSystem damagePS;
+
 
 
     private Weapon weapon;
@@ -38,6 +45,7 @@ public class WeaponController : MonoBehaviour
         if (state == CharacterAttackState.Attack)
         {
             bulletPS.Play();
+            onFire?.Invoke();
         }
     }
 
@@ -51,7 +59,7 @@ public class WeaponController : MonoBehaviour
 
         }
         ShowDamage(touchedObject);
-
+        onDamage?.Invoke();
     }
 
     private void ShowDamage(GameObject touchedObject)

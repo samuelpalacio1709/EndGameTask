@@ -9,7 +9,7 @@ public class EntityManager : MonoBehaviour, IGameEntity
     [SerializeField] protected HealthController healthController;
     protected CharacterMovement characterMovement;
     protected CharacterAnimation characterAnimation;
-    protected Action onEntityKilled;
+    public static Action<string> onEntityKilled;
     private void Awake() => Init();
     public virtual void Init()
     {
@@ -56,8 +56,8 @@ public class EntityManager : MonoBehaviour, IGameEntity
     /// <param name="entity"></param>
     public void Kill(IGameEntity entity)
     {
-        onEntityKilled?.Invoke();
-        Debug.Log(this.GetSettings().GetName() + " has killed " + entity.GetSettings().GetName()); //It would be cool to display this
+        string info = this.GetSettings().GetName() + " has killed " + entity.GetSettings().GetName();
+        onEntityKilled?.Invoke(info);
         entity.Respawn();
 
     }

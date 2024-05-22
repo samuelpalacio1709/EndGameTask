@@ -19,10 +19,10 @@ public class CharacterInteractor : MonoBehaviour, IEntityInteractor
         IEntityInteractable interactable;
         if (other.gameObject.TryGetComponent(out interactable))
         {
-            currentInteractable = interactable;
-            if (CheckIfEntityCanInteract())
+            if (CheckIfEntityCanInteract(interactable))
 
             {
+                currentInteractable = interactable;
                 interactable.EnterInteractable();
             }
             else
@@ -40,9 +40,12 @@ public class CharacterInteractor : MonoBehaviour, IEntityInteractor
         {
             if (currentInteractable == interactable)
             {
-                interactable.ExitInteractable();
-                currentInteractable = null;
+                interactable.HoverExit();
+
             }
+
+            interactable.ExitInteractable();
+
 
 
         }
@@ -52,7 +55,7 @@ public class CharacterInteractor : MonoBehaviour, IEntityInteractor
         if (currentInteractable != null)
         {
 
-            if (CheckIfEntityCanInteract())
+            if (CheckIfEntityCanInteract(currentInteractable))
             {
                 currentInteractable.Interact(this);
             }
@@ -64,18 +67,18 @@ public class CharacterInteractor : MonoBehaviour, IEntityInteractor
     /// Check if entity (player) has all interactables required to interact with the selected interactable
     /// </summary>
     /// <returns></returns>
-    private bool CheckIfEntityCanInteract()
+    private bool CheckIfEntityCanInteract(IEntityInteractable interactable)
     {
 
-        if (currentInteractable == null) return false;
-        if (currentInteractable.InteractableInfo.onInventory) return false;
+        if (interactable == null) return false;
+        if (interactable.InteractableInfo.onInventory) return false;
 
         List<InteractableInfo> interatablesInfo = equippedInteractables
                             .Select(interactable => interactable.InteractableInfo).ToList();
 
         if (interatablesInfo == null) return true;
 
-        return currentInteractable.InteractableInfo.requiredInteractables
+        return interactable.InteractableInfo.requiredInteractables
                           .All(interactable => interatablesInfo.Contains(interactable));
     }
 

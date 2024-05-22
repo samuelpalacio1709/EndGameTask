@@ -1,18 +1,36 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 public class UIManager : Singleton<UIManager>
 {
+    [Header("Toast Message")]
+
     [SerializeField] private TMP_Text toastMessage;
+
+    [Header("Inventory")]
+
     [SerializeField] private InventoryInfo inventory;
     [SerializeField] private List<UISlot> weaponSlots = new List<UISlot>();
     [SerializeField] private List<UISlot> consumablesSlots = new List<UISlot>();
+
+    [Header("Match Info settings")]
+    [SerializeField] private TMP_Text matchInfoText;
+    [SerializeField] private float matchInfoDuration;
+
     private void OnEnable()
     {
         if (inventory != null)
         {
             inventory.onInventoryChange += UpdateInventoryView;
         }
+        EntityManager.onEntityKilled += ShowMatchInfo;
+    }
+
+    private void ShowMatchInfo(string info)
+    {
+        matchInfoText.text = info;
+        StartCoroutine(SetTextTimer(matchInfoText, matchInfoDuration));
     }
     private void OnDisable()
     {
@@ -20,6 +38,8 @@ public class UIManager : Singleton<UIManager>
         {
             inventory.onInventoryChange -= UpdateInventoryView;
         }
+        EntityManager.onEntityKilled -= ShowMatchInfo;
+
     }
     private void Start()
     {
@@ -60,6 +80,12 @@ public class UIManager : Singleton<UIManager>
             toastMessage.text = "";
         }
 
+    }
+
+    public IEnumerator SetTextTimer(TMP_Text label, float time)
+    {
+        yield return new WaitForSeconds(time);
+        label.text = "";
     }
 
 }

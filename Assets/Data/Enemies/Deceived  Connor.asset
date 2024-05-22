@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a772b6286c95b94788778618f62371d, type: 3}
-  m_Name: ConnorCorrupted
+  m_Name: Deceived  Connor
   m_EditorClassIdentifier: 
-  characterName: Angry Connor
-  totalHealth: 2000
-  attackTime: 1.2
-  damage: 45
+  characterName: Deceived  Connor
+  totalHealth: 500
+  attackTime: 1.5
+  damage: 30
   movementSpeed: 2
   turnSpeed: 100
-  increaseHealthFactor: 5
+  increaseHealthFactor: 2
   rotationOffsetOnAttack: {x: 0, y: 38, z: 0}
   rotationOffset: {x: 0, y: 20, z: 0}
-  color: {r: 1, g: 0.57197016, b: 0.06132078, a: 1}
-  minAttackTime: 0.6
-  maxAttackTime: 3
+  color: {r: 0.9433962, g: 0.8694733, b: 0.37824848, a: 1}
+  minAttackTime: 0.5
+  maxAttackTime: 3.1

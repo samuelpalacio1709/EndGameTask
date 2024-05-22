@@ -512,6 +512,78 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3505294546144418764}
     m_Modifications:
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].time
+      value: 0.7049742
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[3].time
+      value: 0.76266503
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[4].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].value
+      value: 0.99561936
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[3].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].inSlope
+      value: -0.44004568
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[3].inSlope
+      value: -0.6423868
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[4].inSlope
+      value: -3.4611514
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[2].outSlope
+      value: -0.44004568
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[3].inWeight
+      value: 0.11386562
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[3].outSlope
+      value: -0.6423868
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[4].inWeight
+      value: 0.07359314
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[4].outSlope
+      value: -3.4611514
+      objectReference: {fileID: 0}
+    - target: {fileID: 456904650957314692, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[4].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     - target: {fileID: 782848318591161205, guid: 91afd2efc9f78674293c0d7f70420546, type: 3}
       propertyPath: m_Name
       value: WeaponController
