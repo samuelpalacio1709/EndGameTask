@@ -15,7 +15,7 @@ MonoBehaviour:
   characterName: Connor
   totalHealth: 1200
   attackTime: 1
-  damage: 68
+  damage: 74
   movementSpeed: 2.8
   turnSpeed: 15
   increaseHealthFactor: 4

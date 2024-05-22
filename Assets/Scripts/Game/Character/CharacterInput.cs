@@ -12,6 +12,8 @@ public class CharacterInput : MonoBehaviour
     private CharacterAttackState characterState = CharacterAttackState.Rest;
     private CharacterSettings characterSettings;
     private WaitForEndOfFrame onFrameEnd = new WaitForEndOfFrame();
+    private Vector2 aimValue = Vector2.zero;
+    private float pressedValue = 0;
     private void Awake()
     {
         characterSettings = GetComponent<IGameEntity>().GetSettings() as CharacterSettings;
@@ -25,6 +27,7 @@ public class CharacterInput : MonoBehaviour
         input.Player.Attack.performed += HandleInputAttack;
         input.Player.Attack.canceled += HandleInputAttack;
         input.Player.Interact.performed += HandleInputInteract;
+        input.Player.Aim.performed += HandleInputAim;
         SetAttackState(CharacterAttackState.Rest);
         shootingTimeCoroutine = null;
 
@@ -37,13 +40,15 @@ public class CharacterInput : MonoBehaviour
         input.Player.Attack.performed -= HandleInputAttack;
         input.Player.Attack.canceled -= HandleInputAttack;
         input.Player.Interact.performed -= HandleInputInteract;
+        input.Player.Aim.performed -= HandleInputAim;
+
         StopAllCoroutines();
     }
 
 
     private void HandleInputMovementPerformed(InputAction.CallbackContext context)
     {
-        OnInputMovement?.Invoke(context.ReadValue<Vector2>());
+        OnInputMovement?.Invoke(context.ReadValue<Vector2>().normalized);
     }
     private void HandleInputMovementCanceled(InputAction.CallbackContext context)
     {
@@ -53,8 +58,16 @@ public class CharacterInput : MonoBehaviour
     {
         onInputInteract?.Invoke();
     }
+    private void HandleInputAim(InputAction.CallbackContext context)
+    {
+        aimValue = context.ReadValue<Vector2>().normalized;
+        CoordinatesHandler.SetAim(aimValue);
+
+    }
     private void HandleInputAttack(InputAction.CallbackContext context)
     {
+
+        pressedValue = context.ReadValue<float>();
         if (gameObject.activeSelf)
         {
             StartCoroutine(ProccessAttack(context));
@@ -67,12 +80,18 @@ public class CharacterInput : MonoBehaviour
     {
         yield return onFrameEnd;
 
-        //Check if the mouse is over UI
-        if (!MouseToFloorCoordinates.IsMouseOnWorldTarget()
-        && characterState != CharacterAttackState.Aim)
-            yield break;
+
+        //Check if the mouse is over UI on pc
+
+#if !UNITY_ANDROID
+                if (!CoordinatesHandler.IsMouseOnWorldTarget()
+                    && characterState != CharacterAttackState.Aim)
+                    yield break;
+#endif
+
 
         var clickValue = context.ReadValue<float>();
+        pressedValue = clickValue;
 
         if ((shootingTimeCoroutine == null))
         {
@@ -98,8 +117,9 @@ public class CharacterInput : MonoBehaviour
     private IEnumerator StopAttack()
     {
         yield return new WaitForSeconds(characterSettings.attackTime);
-        characterState = Mouse.current.leftButton.isPressed ?
-                            CharacterAttackState.Aim : CharacterAttackState.Rest;
+
+        characterState = pressedValue > 0 ?
+                   CharacterAttackState.Aim : CharacterAttackState.Rest;
 
         SetAttackState(characterState);
         shootingTimeCoroutine = null;
@@ -107,7 +127,8 @@ public class CharacterInput : MonoBehaviour
 
     private void SetAttackState(CharacterAttackState state)
     {
-        onInputAttack?.Invoke(state, MouseToFloorCoordinates.GetWorldPosition());
+        onInputAttack?.Invoke(state, CoordinatesHandler
+                         .GetWorldPosition(transform.position));
 
     }
 

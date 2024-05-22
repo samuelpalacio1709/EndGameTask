@@ -27,7 +27,7 @@ public class UIManager : Singleton<UIManager>
         EntityManager.onEntityKilled += ShowMatchInfo;
     }
 
-    private void ShowMatchInfo(string info)
+    private void ShowMatchInfo(string info, bool playerDead)
     {
         matchInfoText.text = info;
         StartCoroutine(SetTextTimer(matchInfoText, matchInfoDuration));

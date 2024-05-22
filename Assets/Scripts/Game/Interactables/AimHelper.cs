@@ -1,5 +1,4 @@
 using UnityEngine;
-using static CharacterInput;
 
 public class AimHelper : MonoBehaviour
 {
@@ -16,5 +15,6 @@ public class AimHelper : MonoBehaviour
     private void ChangeAimState(CharacterAttackState state, Vector3 target)
     {
         aimHelper.gameObject.SetActive(state == CharacterAttackState.Aim);
+        Debug.Log("Aim");
     }
 }

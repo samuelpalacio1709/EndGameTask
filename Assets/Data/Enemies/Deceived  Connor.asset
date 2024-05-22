@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Deceived  Connor
   m_EditorClassIdentifier: 
   characterName: Deceived  Connor
-  totalHealth: 500
+  totalHealth: 1000
   attackTime: 1.5
   damage: 30
   movementSpeed: 2

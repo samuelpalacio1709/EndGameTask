@@ -9,7 +9,7 @@ public class EntityManager : MonoBehaviour, IGameEntity
     [SerializeField] protected HealthController healthController;
     protected CharacterMovement characterMovement;
     protected CharacterAnimation characterAnimation;
-    public static Action<string> onEntityKilled;
+    public static Action<string, bool> onEntityKilled;
     private void Awake() => Init();
     public virtual void Init()
     {
@@ -50,14 +50,11 @@ public class EntityManager : MonoBehaviour, IGameEntity
         return settings;
     }
 
-    /// <summary>
-    /// Called whether a player kills an enemy or vice versa
-    /// </summary>
-    /// <param name="entity"></param>
-    public void Kill(IGameEntity entity)
+
+    public virtual void Kill(IGameEntity entity)
     {
         string info = this.GetSettings().GetName() + " has killed " + entity.GetSettings().GetName();
-        onEntityKilled?.Invoke(info);
+        onEntityKilled?.Invoke(info, false);
         entity.Respawn();
 
     }

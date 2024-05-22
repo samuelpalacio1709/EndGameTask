@@ -74,11 +74,13 @@ public class EnemyManager : EntityManager
         }
     }
 
-    private void ProccessEntityKilled(string info)
+    private void ProccessEntityKilled(string info, bool playerDead)
     {
+        if (playerDead)
+        {
+            SetWander();
 
-        //When the enemy kills a player set state to wander
-        SetWander();
+        }
     }
     private void WanderFreely()
     {
@@ -148,5 +150,15 @@ public class EnemyManager : EntityManager
     private void GetRandomAttackTime()
     {
         timeToAttack = Random.Range(enemySettings.minAttackTime, enemySettings.maxAttackTime);
+    }
+    /// <summary>
+    /// Called whether a player kills an enemy or vice versa
+    /// </summary>
+    /// <param name="entity"></param>
+    public override void Kill(IGameEntity entity)
+    {
+        string info = this.GetSettings().GetName() + " has killed " + entity.GetSettings().GetName();
+        onEntityKilled?.Invoke(info, true);
+        entity.Respawn();
     }
 }

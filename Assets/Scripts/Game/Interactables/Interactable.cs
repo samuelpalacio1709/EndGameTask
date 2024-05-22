@@ -35,6 +35,7 @@ public class Interactable : MonoBehaviour, IEntityInteractable
 
     public virtual void PreventInteraction(IEntityInteractor interactor)
     {
+
         UIManager.Instance.ShowToastMessage(InteractableInfo.messageOnUnableToInteract);
     }
 }
