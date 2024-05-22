@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
-
+/// <summary>
+/// Handles the heatlh logic and send the information to health view
+/// </summary>
 [RequireComponent(typeof(HealthView))]
 public class HealthController : MonoBehaviour
 {

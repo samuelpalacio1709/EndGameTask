@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles character animations
+/// </summary>
 public class CharacterAnimation : MonoBehaviour
 {
     [SerializeField] private Animator animator;
@@ -27,6 +30,10 @@ public class CharacterAnimation : MonoBehaviour
     {
         SetSmoothAttackAnimation();
     }
+
+    /// <summary>
+    /// Set attack layer animation
+    /// </summary>
     private void SetSmoothAttackAnimation()
     {
         var layer = animator.GetLayerIndex(attackLayerName);

@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Ui inventory slot
+/// </summary>
 public class UISlot : MonoBehaviour
 {
     [SerializeField] private Image iconImage;

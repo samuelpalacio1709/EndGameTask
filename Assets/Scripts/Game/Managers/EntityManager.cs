@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
 
+
+/// <summary>
+/// Entity manager base class to handle all common entity behaviors (health, movement, death..)
+/// </summary>
 [RequireComponent(typeof(CharacterAnimation))]
 [RequireComponent(typeof(PlayerMovement))]
 public class EntityManager : MonoBehaviour, IGameEntity

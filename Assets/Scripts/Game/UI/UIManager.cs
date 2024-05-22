@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+
+/// <summary>
+/// Handles all UI updates
+/// </summary>
 public class UIManager : Singleton<UIManager>
 {
     [Header("Toast Message")]

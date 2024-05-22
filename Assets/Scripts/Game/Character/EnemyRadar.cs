@@ -14,6 +14,7 @@ public class EnemyRadar : MonoBehaviour
     {
         if (radar != null)
         {
+            //Set radar collider
             radar.transform.localScale = new Vector3(radarRadius, radarRadius, radarRadius);
 
         }

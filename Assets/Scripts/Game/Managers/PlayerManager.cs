@@ -50,6 +50,7 @@ public class PlayerManager : EntityManager, IEnemyInteractable
 
     public void Interact()
     {
+        Debug.Log("Interact");
     }
 
 }

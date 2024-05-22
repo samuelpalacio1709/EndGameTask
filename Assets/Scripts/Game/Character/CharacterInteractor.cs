@@ -3,6 +3,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// This class manages all interactable objects triggered by the entity
+/// </summary>
 public class CharacterInteractor : MonoBehaviour, IEntityInteractor
 {
     [SerializeField] private UnityEvent<IEntityInteractable> onSavedInteractable;

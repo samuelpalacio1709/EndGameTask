@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Control center for audisources
+/// </summary>
 [RequireComponent(typeof(AudioSource))]
 public class SoundController : MonoBehaviour
 {

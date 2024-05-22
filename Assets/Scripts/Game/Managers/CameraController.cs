@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Updates camera position to follow an custom target
+/// </summary>
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Vector3 offset;

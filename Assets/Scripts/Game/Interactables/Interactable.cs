@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+
+/// <summary>
+/// Implementation of IEntityInteractable. Handles all the logic when the player sends interactions.
+/// </summary>
 public class Interactable : MonoBehaviour, IEntityInteractable
 {
     [SerializeField] private InteractableInfo interactableInfo;

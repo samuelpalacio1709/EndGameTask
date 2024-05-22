@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Updates the weapon transform to be constraint by  the left Hand
+/// </summary>
 public class WeaponIK : MonoBehaviour
 {
     public Transform leftHand;

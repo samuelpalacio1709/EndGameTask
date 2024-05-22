@@ -2,6 +2,10 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+/// <summary>
+/// This class handles all input from the input system
+/// </summary>
 public class CharacterInput : MonoBehaviour
 {
     private PlayerInputActions input;
@@ -75,7 +79,11 @@ public class CharacterInput : MonoBehaviour
         }
 
     }
-
+    /// <summary>
+    /// Set the input state to attack
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
     private IEnumerator ProccessAttack(InputAction.CallbackContext context)
     {
         yield return onFrameEnd;

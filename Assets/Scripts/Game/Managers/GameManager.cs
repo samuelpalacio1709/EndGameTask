@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// This class holds the reference to the game components
+/// This class holds the reference to  game components
 /// </summary>
 public class GameManager : Singleton<GameManager>
 {

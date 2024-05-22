@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Controlls the entity weapon
+/// </summary>
 public class WeaponController : MonoBehaviour
 {
 

@@ -58,6 +58,11 @@ public class EnemyManager : EntityManager
         characterAnimation.UpdateMovementAnimation(agent.velocity);
 
     }
+
+    /// <summary>
+    /// Updates the steering behavior of the enemy based on its current state
+    /// </summary>
+    /// <param name="state"></param>
     public void CheckState(EnemyState state)
     {
         switch (state)

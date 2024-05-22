@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles entity spawn positions
+/// </summary>
 public class SpawnManager : Singleton<SpawnManager>
 {
     [SerializeField] private List<Transform> spawnPoints = new List<Transform>();

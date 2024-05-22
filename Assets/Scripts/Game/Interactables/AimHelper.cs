@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles the visibility of the aim rectangular bar
+/// </summary>
 public class AimHelper : MonoBehaviour
 {
     [SerializeField] private GameObject aimHelper;
@@ -15,6 +18,5 @@ public class AimHelper : MonoBehaviour
     private void ChangeAimState(CharacterAttackState state, Vector3 target)
     {
         aimHelper.gameObject.SetActive(state == CharacterAttackState.Aim);
-        Debug.Log("Aim");
     }
 }

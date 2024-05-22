@@ -2,6 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Updates the health UI
+/// </summary>
 public class HealthView : MonoBehaviour
 {
     [SerializeField] private Image fillImage;
