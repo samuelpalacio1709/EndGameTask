@@ -8,11 +8,11 @@ I used a reusable approach for creating both players and enemies. These entities
 
 ### Player Input
 
-This project uses the Unity Input System to handle both PC and mobile gamepad bindings.
+This project uses the Unity Input System to handle both PC and mobile gamepad bindings.For the player attack system, I took inspiration from games like Zooba, Brawl Stars, and Zombs Royale.
 
 ### Components
 
-Each game entity has different components that serve a single purpose, such as the weapon controller and health controller. For the player attack system, I took inspiration from games like Zooba, Brawl Stars, and Zombs Royale.
+Each game entity has different components that serve a single purpose, such as the weapon controller and health controller. 
 
 ###  Interactables
 
